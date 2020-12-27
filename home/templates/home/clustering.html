@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Heading -->
+        {% comment %} <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">K-Means Clustering On Given Dataset</h1>
+        </div>{% endcomment %}
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">K-Means Clustering On Given Dataset</h6>
+            </div>
+            <div class="card-body">
+                   <div class="py-3 d-sm-flex align-items-center justify-content-center">
+                    {{ plot | safe }}
+                </div>
+                {% comment %} </div> {% endcomment %}
+                <hr>
+                After plotting the results obtained by K-means on this 3D graphic, it's our job now to identify and describe the five clusters that have been created:
+
+Yellow Cluster - The yellow cluster groups young people with moderate to low annual income who actually spend a lot.
+Purple Cluster - The purple cluster groups reasonably young people with pretty decent salaries who spend a lot.
+Pink Cluster - The pink cluster basically groups people of all ages whose salary isn't pretty high and their spending score is moderate.
+Orange Cluster - The orange cluster groups people who actually have pretty good salaries and barely spend money, their age usually lays between thirty and sixty years.
+Blue Cluster - The blue cluster groups whose salary is pretty low and don't spend much money in stores, they are people of all ages.
+            </div>
+        </div>
+{% endblock %}

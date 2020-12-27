@@ -1,0 +1,90 @@
+<script>
+
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+            } else {
+            a[i].style.display = "none";
+            }
+        }
+    }
+
+    function fetchAprRules(val){
+        allRanges = {{AgeRanges | safe}}
+        ageRange = allRanges[val].split('-')
+
+        document.getElementById("ageRangeButton").innerHTML = allRanges[val];
+
+        document.getElementById("customDropdown").classList.remove("showSelect")
+        document.getElementById("recommendations").classList.add("hide")
+
+        const url=`http://127.0.0.1:8000/api?data=AgeRange&startAge=${ageRange[0]}&endAge=${ageRange[1]}`;
+        console.log(url)
+        fetch(url)
+        .then(res => res.json())
+        .then((data)=>{
+            document.getElementById("customDropdown").classList.add("showSelect")
+            document.getElementById("custDropDownBtn").innerHTML = "Search & Select"
+
+            list = new Set(data.data.split(','))
+            list.forEach((item)=> {
+                //append anchor tags in the dropdown list of items
+                a = document.createElement("A")
+                aText = document.createTextNode(item)
+
+                a.appendChild(aText)
+
+                a.setAttribute("onclick", `fetchAprResults('${item}')`);
+
+
+                document.getElementById("myDropdown").appendChild(a)
+
+            })
+            console.log("Items data Loaded...")
+
+        })
+        .catch(error => console.log(error));
+    }
+
+    function fetchAprResults(query){
+
+        document.getElementById("myDropdown").classList.remove("show")
+        document.getElementById("recommendations").classList.remove("hide")
+
+        document.getElementById("custDropDownBtn").innerHTML = query
+        console.log(`Selected ${query}`)
+
+        const url=`http://127.0.0.1:8000/api?data=Recomms&query=${query}`
+
+        fetch(url)
+        .then(res => res.json())
+        .then((data) => {
+            list = new Set(data.data.split(','))
+
+            data = document.getElementById("recommArea").innerHTML
+            list.forEach((item) => {
+                data += `
+
+                    <div class="card mb-4 py-3 border-left-primary">
+                        &nbsp;&nbsp;${item}
+                    </div>
+
+                `
+                document.getElementById("recommArea").innerHTML = data
+
+            })
+            console.log(list)
+        })
+    }
+</script>

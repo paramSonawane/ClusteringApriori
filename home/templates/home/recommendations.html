@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include './partials/_recommStyles.html' %}
+
+    <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Recommendations</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="dropdown mb-4">AGE :
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="ageRangeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Range
+                    </button>
+                    <div class="dropdown-menu animated--fade-in" aria-labelledby="ageRangeButton" style="">
+                        {% for range in AgeRanges %}
+                        <a class="dropdown-item" onClick="fetchAprRules({{forloop.counter0}})">{{range}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-12">
+                <div class="customDropdown" id="customDropdown">
+                    Item(s) : <button onclick="myFunction()" class="dropbtn btn btn-success " id="custDropDownBtn">Search and Select</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row hide" id="recommendations">
+            <div class="col-12">
+                <div class="card shadow mb-4" >
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Items Frequently Bought Together</h6>
+                    </div>
+
+                    <div class="card-body" id="recommArea">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{% include './partials/_recommScripts.html' %}
+{% endblock %}
