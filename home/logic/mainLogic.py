@@ -124,7 +124,6 @@ def giveAssocOnAgeRange(age_min, age_max):
 
 	l = list(df1[1])
 
-	print(l)
 	return {'data': ",".join(["#".join(item) for item in l])}
 
 def giveAssocRight(query):
@@ -135,13 +134,11 @@ def giveAssocRight(query):
 	n = len(df.index)
 	for i in range(n):
 		s = df.iloc[i]
-		# print(s[1])
 		for item in splitq:
 			if item in s[1]:
 				df1 = df1.append(s)
 				break
 
-	print(df1)
 	df1 = df1.sort_values(df1.columns[3], ascending=False)
 	l = list(df1[2])
 
