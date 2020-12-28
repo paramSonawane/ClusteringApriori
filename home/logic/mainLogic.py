@@ -125,10 +125,10 @@ def giveAssocOnAgeRange(age_min, age_max):
 	l = list(df1[1])
 
 	print(l)
-	return {'data': ",".join(["&".join(item) for item in l])}
+	return {'data': ",".join(["#".join(item) for item in l])}
 
 def giveAssocRight(query):
-	splitq = query.split('&')
+	splitq = query.split('#')
 	print(splitq)
 	df = pd.DataFrame(glob_state).transpose()
 	df1 = pd.DataFrame()
@@ -145,4 +145,4 @@ def giveAssocRight(query):
 	df1 = df1.sort_values(df1.columns[3], ascending=False)
 	l = list(df1[2])
 
-	return { 'data' : ",".join(["&".join(item) for item in l])}
+	return { 'data' : ",".join(["#".join(item) for item in l])}
