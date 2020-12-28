@@ -59,8 +59,8 @@ def kmean():
 	return clusterInfo, labels
 
 # Takes input as cluster label and performs apriori mining on that cluster
-def apr(clust_label):
-	ar = apriori(apdata[clust_label], min_support = 0.005, min_confidence= 0.4, min_lift= 4)
+def apr(clust_label, ms, mc, ml):
+	ar = apriori(apdata[clust_label], min_support = ms, min_confidence= mc, min_lift= ml)
 	results = list(ar)
 	d = {}
 	i = 0
@@ -73,6 +73,8 @@ def apr(clust_label):
 		l.append(record[2][0][3])
 		d[i] = l
 		i += 1
+
+		print(d)
 	return d
 
 
