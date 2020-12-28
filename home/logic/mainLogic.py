@@ -74,7 +74,6 @@ def apr(clust_label, ms, mc, ml):
 		d[i] = l
 		i += 1
 
-		print(d)
 	return d
 
 
@@ -130,7 +129,6 @@ def giveAssocOnAgeRange(age_min, age_max):
 
 def giveAssocRight(query):
 	splitq = query.split('#')
-	print(splitq)
 	df = pd.DataFrame(glob_state).transpose()
 	df1 = pd.DataFrame()
 	n = len(df.index)
