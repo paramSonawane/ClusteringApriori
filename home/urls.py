@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 
+app_name = 'home'
+
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('dashboard', views.home, name='home'),
     path('recommendations', views.recommendations, name='recommendations'),
     path('clustering', views.clustering, name='clustering'),
     path('api', views.api, name='api'),
