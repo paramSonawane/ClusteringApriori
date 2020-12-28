@@ -48,9 +48,19 @@
             active
         {% endif %}
     ">
-        <a class="nav-link" href="clustering" id="sidebarClustering">
+        <a class="nav-link" href="{% url 'home:clustering' %}" id="sidebarClustering">
             <i class="fas fa-fw fa-project-diagram"></i>
             <span>Clustering</span>
+        </a>
+    </li>
+    <li class="nav-item
+        {% if activeTab == "aprOnClustering" %}
+            active
+        {% endif %}
+    ">
+        <a class="nav-link" href="{% url 'home:aprOnClustering' %}" id="sidebarAprOnClustering">
+            <i class="fas fa-fw fa-project-diagram"></i>
+            <span>Apriori On Clusters</span>
         </a>
     </li>
 

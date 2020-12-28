@@ -1,0 +1,51 @@
+<style>
+.hide{
+        display: none;
+    }
+</style>
+<script>
+    clusterSelected = 0
+
+    function setCluster(num){
+        clusterSelected = num
+        button = document.getElementById('clusterButton')
+        button.innerHTML = num;
+        document.getElementById("fetchButton").classList.remove("hide")
+    }
+
+    function toTitleCase(str) {
+        return str.toLowerCase().split(' ').map(function (word) {
+            return (word.charAt(0).toUpperCase() + word.slice(1));
+        }).join(' ');
+    }
+    function fetchAprs(){
+        ms = document.getElementById("minSupportInput").value
+        mc = document.getElementById("minConfidenceInput").value
+        ml = document.getElementById("minLiftInput").value
+
+        const url = `http://127.0.0.1:8000/home/api?data=Aprs&cluster=${clusterSelected}&ms=${ms}&mc=${mc}&ml=${ml}`
+
+        listArea = ""
+        document.getElementById("appnedListHere").innerHTML = ''
+        fetch(url)
+        .then(res => res.json())
+        .then((data) => {
+            for(key in data){
+                console.log(data[key])
+
+                listArea +=`
+                    <tr role="row" class="odd">
+                        <td class="sorting_1">${data[key][0]}</td>
+                        <td>${data[key][1]}</td>
+                        <td>${data[key][2]}</td>
+                        <td>${data[key][3]}</td>
+                        <td>${data[key][4]}</td>
+                    </tr>
+                    `
+
+            }
+            document.getElementById("appnedListHere").innerHTML = listArea
+        })
+    }
+
+</script>

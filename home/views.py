@@ -16,6 +16,9 @@ def api(requests):
     elif dataReq == "Recomms" :
         return JsonResponse(mainLogic.giveAssocRight(requests.GET["query"]))
 
+    elif dataReq == "Aprs" :
+        return JsonResponse(mainLogic.apr(int(requests.GET["cluster"]), float(requests.GET["ms"]), float(requests.GET["mc"]), float(requests.GET["ml"])))
+
 
 def home(requests):
     context = {
@@ -35,6 +38,7 @@ AgeRanges = [
     '58-65',
     '66-70'
 ]
+
 def recommendations(request):
     context = {
         'activeTab' : "recommendations",
@@ -48,3 +52,10 @@ def clustering(request):
         'plot' : graphs.plotScatter(clusterInfo, labels)
     }
     return render(request, 'home/clustering.html', context)
+
+def aprOnClustering(request):
+    context = {
+        'activeTab' : "aprOnClustering",
+        'clusters' : ['0','1','2','3','4']
+    }
+    return render(request, 'home/aprOnClustering.html', context)

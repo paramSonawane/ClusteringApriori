@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Using Apropri algorithm on K-Means Clusters</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <div class="dropdown mb-4">Cluster No :<br>
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="clusterButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select
+                    </button>
+                    <div class="dropdown-menu animated--fade-in" aria-labelledby="clusterButton" style="">
+                        {% for item in clusters %}
+                        <a class="dropdown-item" onClick="setCluster({{item}})" id={{item}}>{{item}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2">
+            Minimum Support :
+                <input type="number" class="form-control form-control-user"
+                id="minSupportInput" placeholder="Minimum Support"
+                min="0.005" value = "0.005" step="0.001">
+            </div>
+
+            <div class="col-lg-2 col-md-2">
+            Minimum Confidence :
+                <input type="number" class="form-control form-control-user"
+                id="minConfidenceInput" placeholder="Minimum Confidence"
+                min="0.3" max="1" value = "0.4" step="0.01">
+            </div>
+
+            <div class="col-lg-2 col-md-2">
+            Minimum Lift :
+                <input type="number" class="form-control form-control-user"
+                id="minLiftInput" placeholder="Minimum Lift"
+                min="2" value = "4" step="0.5">
+            </div>
+
+            <div class="col-lg-2 col-md-2 py-3 d-sm-flex  align-items-center justify-content-center">
+                <a class="btn btn-success btn-user btn-block hide" onClick="fetchAprs()" id="fetchButton">
+                    Fetch Data
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Association Rules</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                 <div class="row"><div class="col-sm-12"><table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 78px;">Support</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 77px;">Antecedant</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 69px;">Consequent</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 38px;">Confidence</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 93px;">Lift</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="appnedListHere">
+                                    </tbody>
+                                </table>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+{% include './partials/_aprOnClusteringScripts.html' %}
+{% endblock %}
