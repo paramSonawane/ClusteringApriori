@@ -10,7 +10,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-md-6">
                 <div class="dropdown mb-4">AGE :
                     <button class="btn btn-primary dropdown-toggle" type="button" id="ageRangeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Select Range
@@ -22,8 +22,10 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 hide" id="loading">
+                <div class="whirly-loader"></div>
+            </div>
+            <div class="col-lg-6 col-md-6">
                 <div class="customDropdown" id="customDropdown">
                     Item(s) : <button onclick="myFunction()" class="dropbtn btn btn-success " id="custDropDownBtn">Search and Select</button>
                     <div id="myDropdown" class="dropdown-content">

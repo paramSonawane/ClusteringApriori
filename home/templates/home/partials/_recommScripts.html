@@ -26,16 +26,26 @@
 
         document.getElementById("ageRangeButton").innerHTML = allRanges[val];
 
+        //hide old select list if running for second timme
         document.getElementById("customDropdown").classList.remove("showSelect")
+
+        //hide old recommendations if running for second time
         document.getElementById("recommendations").classList.add("hide")
+
+        //show loading animation
+        document.getElementById("loading").classList.remove("hide")
+
+
 
         const url=`http://127.0.0.1:8000/api?data=AgeRange&startAge=${ageRange[0]}&endAge=${ageRange[1]}`;
         console.log(url)
         fetch(url)
         .then(res => res.json())
         .then((data)=>{
+            document.getElementById("loading").classList.add("hide")
             document.getElementById("customDropdown").classList.add("showSelect")
             document.getElementById("custDropDownBtn").innerHTML = "Search & Select"
+
 
             list = new Set(data.data.split(','))
             list.forEach((item)=> {
