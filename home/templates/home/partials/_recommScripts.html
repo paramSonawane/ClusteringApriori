@@ -35,54 +35,73 @@
         //show loading animation
         document.getElementById("loading").classList.remove("hide")
 
+        //disable button till the response arrives to avoid multiple fetch requests
+        document.getElementById("ageRangeButton").disabled = true;
 
 
         const url=`http://127.0.0.1:8000/api?data=AgeRange&startAge=${ageRange[0]}&endAge=${ageRange[1]}`;
-        console.log(url)
         fetch(url)
         .then(res => res.json())
         .then((data)=>{
+            //once response arrives, enable the button to allow new fetch request
+            document.getElementById("ageRangeButton").disabled = false;
+
+            //hide the loading animation
             document.getElementById("loading").classList.add("hide")
+
+            //show items selection list
             document.getElementById("customDropdown").classList.add("showSelect")
+
+            //reset the list select button text in case the age request is not fired first time
             document.getElementById("custDropDownBtn").innerHTML = "Search & Select"
 
-
+            //read the response and add elements in dropdown lists as anchor tags
             list = new Set(data.data.split(','))
+
+            //remove all the old entires in case of fetching multiple times
+            document.getElementById("myDropdown").querySelectorAll('a').forEach(n => n.remove());
             list.forEach((item)=> {
+                //replace the separator 
+                item.replace('#', ',')
+
                 //append anchor tags in the dropdown list of items
                 a = document.createElement("A")
                 aText = document.createTextNode(item)
-
                 a.appendChild(aText)
 
+                //add onclick event to each element to call function for 2nd fetch
                 a.setAttribute("onclick", `fetchAprResults('${item}')`);
 
-
+                //append this item in dropdown list
                 document.getElementById("myDropdown").appendChild(a)
 
             })
-            console.log("Items data Loaded...")
-
         })
         .catch(error => console.log(error));
     }
 
     function fetchAprResults(query){
-
+        //hide the dropdown menu in case its out
         document.getElementById("myDropdown").classList.remove("show")
+
+        //hide the recommendations if the request is not the first one
         document.getElementById("recommendations").classList.remove("hide")
 
+        //get currently selected item
         document.getElementById("custDropDownBtn").innerHTML = query
-        console.log(`Selected ${query}`)
 
         const url=`http://127.0.0.1:8000/api?data=Recomms&query=${query}`
+
 
         fetch(url)
         .then(res => res.json())
         .then((data) => {
+            //get response
             list = new Set(data.data.split(','))
 
-            data = document.getElementById("recommArea").innerHTML
+            //remove all the old recommendations in case of fetching multiple times
+            {% comment %} document.getElementById("recommArea").querySelectorAll('a').forEach(n => n.remove()); {% endcomment %}
+            data = document.getElementById("recommArea").innerHTML = ''
             list.forEach((item) => {
                 data += `
 
@@ -94,7 +113,7 @@
                 document.getElementById("recommArea").innerHTML = data
 
             })
-            console.log(list)
         })
+        .catch(error => console.log(error));
     }
 </script>
