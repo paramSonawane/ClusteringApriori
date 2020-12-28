@@ -74,6 +74,8 @@
                 aText = document.createTextNode(tempItem)
                 a.appendChild(aText)
 
+                a.style.cursor = 'pointer';
+
                 //add onclick event to each element to call function for 2nd fetch
                 a.setAttribute("onclick", `fetchAprResults('${item}')`);
 
@@ -93,7 +95,8 @@
         document.getElementById("recommendations").classList.remove("hide")
 
         //get currently selected item
-        document.getElementById("custDropDownBtn").innerHTML = query
+        tempQuery = toTitleCase(query.replace(/#/g, ', '))
+        document.getElementById("custDropDownBtn").innerHTML = tempQuery
 
         const url=`http://127.0.0.1:8000/api?data=Recomms&query=${query}`
 
