@@ -17,7 +17,7 @@
                     </button>
                     <div class="dropdown-menu animated--fade-in" aria-labelledby="ageRangeButton" style="">
                         {% for range in AgeRanges %}
-                        <a class="dropdown-item" onClick="fetchAprRules({{forloop.counter0}})">{{range}}</a>
+                        <a class="dropdown-item" onClick="fetchAprRules({{forloop.counter0}})" id={{range}}>{{range}}</a>
                         {% endfor %}
                     </div>
                 </div>

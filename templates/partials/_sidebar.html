@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home:home'%}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home:home'%}" id="logoDashboard">
         <div class="sidebar-brand-icon">
             <i class="fas fa-chart-area"></i>
         </div>
@@ -18,7 +18,7 @@
         active
         {% endif %}
         ">
-        <a class="nav-link" href="{% url 'home:home'%}">
+        <a class="nav-link" href="{% url 'home:home'%}" id="sidebarDashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -29,7 +29,7 @@
         active
         {% endif %}
         ">
-        <a class="nav-link" href="{% url 'home:recommendations' %}">
+        <a class="nav-link" href="{% url 'home:recommendations' %}" id="sidebarRecommendations">
             <i class="fas fa-fw fa-search"></i>
             <span>Recommendations</span></a>
     </li>
@@ -48,7 +48,7 @@
             active
         {% endif %}
     ">
-        <a class="nav-link" href="clustering">
+        <a class="nav-link" href="clustering" id="sidebarClustering">
             <i class="fas fa-fw fa-project-diagram"></i>
             <span>Clustering</span>
         </a>

@@ -75,6 +75,7 @@
                 a.appendChild(aText)
 
                 a.style.cursor = 'pointer';
+                a.id = tempItem
 
                 //add onclick event to each element to call function for 2nd fetch
                 a.setAttribute("onclick", `fetchAprResults('${item}')`);
