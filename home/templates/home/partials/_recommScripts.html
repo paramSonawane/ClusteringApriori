@@ -44,7 +44,7 @@
         document.getElementById("ageRangeButton").disabled = true;
 
 
-        const url=`http://127.0.0.1:8000/api?data=AgeRange&startAge=${ageRange[0]}&endAge=${ageRange[1]}`;
+        const url=`http://127.0.0.1:8000/home/api?data=AgeRange&startAge=${ageRange[0]}&endAge=${ageRange[1]}`;
         fetch(url)
         .then(res => res.json())
         .then((data)=>{
@@ -98,7 +98,7 @@
         tempQuery = toTitleCase(query.replace(/#/g, ', '))
         document.getElementById("custDropDownBtn").innerHTML = tempQuery
 
-        const url=`http://127.0.0.1:8000/api?data=Recomms&query=${query}`
+        const url=`http://127.0.0.1:8000/home/api?data=Recomms&query=${query}`
 
 
         fetch(url)

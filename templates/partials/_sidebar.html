@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home:home'%}">
         <div class="sidebar-brand-icon">
             <i class="fas fa-chart-area"></i>
         </div>
@@ -18,7 +18,7 @@
         active
         {% endif %}
         ">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="{% url 'home:home'%}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -29,7 +29,7 @@
         active
         {% endif %}
         ">
-        <a class="nav-link" href="recommendations">
+        <a class="nav-link" href="{% url 'home:recommendations' %}">
             <i class="fas fa-fw fa-search"></i>
             <span>Recommendations</span></a>
     </li>
