@@ -5,7 +5,7 @@
   `python3 manage.py collectstatic`
 
 
-- To Start the Django Server....
+- To Start the Django Server.
 
   `python3 manage.py runsesrver`
 
