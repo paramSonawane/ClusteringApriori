@@ -11,38 +11,68 @@ import plotly.graph_objs as go
 
 
 def plotScatter(clusterInfo, labels):
+	cluster0 = go.Scatter3d(
+		z=(clusterInfo[(clusterInfo.labels == 0)][['Age']]).reset_index()['Age'].tolist(),
+		y=(clusterInfo[(clusterInfo.labels == 0)][['Annual_income']]).reset_index()['Annual_income'].tolist(),
+		x=(clusterInfo[(clusterInfo.labels == 0)][['Spending_score']]).reset_index()['Spending_score'].tolist(),
+		name='Cluster 0',
+	)
+	cluster1 = go.Scatter3d(
+		z=(clusterInfo[(clusterInfo.labels == 1)][['Age']]).reset_index()['Age'].tolist(),
+		y=(clusterInfo[(clusterInfo.labels == 1)][['Annual_income']]).reset_index()['Annual_income'].tolist(),
+		x=(clusterInfo[(clusterInfo.labels == 1)][['Spending_score']]).reset_index()['Spending_score'].tolist(),
+		name='Cluster 1'
+	)
+	cluster2 = go.Scatter3d(
+		z=(clusterInfo[(clusterInfo.labels == 2)][['Age']]).reset_index()['Age'].tolist(),
+		y=(clusterInfo[(clusterInfo.labels == 2)][['Annual_income']]).reset_index()['Annual_income'].tolist(),
+		x=(clusterInfo[(clusterInfo.labels == 2)][['Spending_score']]).reset_index()['Spending_score'].tolist(),
+		name='Cluster 2'
+	)
+	cluster3 = go.Scatter3d(
+		z=(clusterInfo[(clusterInfo.labels == 3)][['Age']]).reset_index()['Age'].tolist(),
+		y=(clusterInfo[(clusterInfo.labels == 3)][['Annual_income']]).reset_index()['Annual_income'].tolist(),
+		x=(clusterInfo[(clusterInfo.labels == 3)][['Spending_score']]).reset_index()['Spending_score'].tolist(),
+		name='Cluster 3'
+	)
+	cluster4 = go.Scatter3d(
+		z=(clusterInfo[(clusterInfo.labels == 4)][['Age']]).reset_index()['Age'].tolist(),
+		y=(clusterInfo[(clusterInfo.labels == 4)][['Annual_income']]).reset_index()['Annual_income'].tolist(),
+		x=(clusterInfo[(clusterInfo.labels == 4)][['Spending_score']]).reset_index()['Spending_score'].tolist(),
+		name='Cluster 4'
+	)
+	clusterCenters = go.Scatter3d(
+		z=(clusterInfo[(clusterInfo.labels == 6)][['Age']]).reset_index()['Age'].tolist(),
+		y=(clusterInfo[(clusterInfo.labels == 6)][['Annual_income']]).reset_index()['Annual_income'].tolist(),
+		x=(clusterInfo[(clusterInfo.labels == 6)][['Spending_score']]).reset_index()['Spending_score'].tolist(),
+		name='Centers',
+		mode='markers',
 
-    trace1 = go.Scatter3d(
-        x= clusterInfo['Spending_score'],
-        y= clusterInfo['Annual_income'],
-        z= clusterInfo['Age'],
-        mode='markers',
+		marker=dict(
+				color = "#eff836",
+				size= 10,
+				line=dict(
+					color= "#eff836",
+				),
+				opacity = 0.9
+			),
+	)
 
-        marker=dict(
-                color = labels,
-                size= 10,
-                line=dict(
-                    color= labels,
-                ),
-                opacity = 0.9
-            ),
+	layout = go.Layout(
+		autosize=False,
+		width=1000,
+		height=800,
+		scene = dict(
+				xaxis = dict(title  = 'Spending_score'),
+				yaxis = dict(title  = 'Annual_income'),
+				zaxis = dict(title  = 'Age')
+			),
+		showlegend=True,
+	)
 
-    )
-    layout = go.Layout(
-        autosize=False,
-        width=1000,
-        height=800,
-        scene = dict(
-                xaxis = dict(title  = 'Spending_score'),
-                yaxis = dict(title  = 'Annual_income'),
-                zaxis = dict(title  = 'Age')
-            )
-    )
-
-    fig = go.Figure(data=trace1, layout=layout)
-    plot_div = plot(fig, output_type='div', include_plotlyjs=False)
-
-    return plot_div
+	fig = go.Figure(data=[cluster0,cluster1, cluster2 ,cluster3, cluster4, clusterCenters], layout=layout)
+	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+	return plot_div
 
 
 

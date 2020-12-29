@@ -51,9 +51,11 @@ def kmean():
 
 	apdata = apdata_prepare(ospJoin(BASE_DIR,'home/logic/CSVs/new_purchase.csv'), km.labels_, df['CustomerID'])
 
-	labels = append(km.labels_, [(len(km.cluster_centers_)+1) for i in range(len(km.cluster_centers_))], axis=0)
+	labels = append(km.labels_, [(6) for i in range(len(km.cluster_centers_))], axis=0)
 
-	clusterInfo = kmeansAttrs.append(pd.DataFrame(km.cluster_centers_.tolist(), columns=["Age", "Annual_income","Spending_score"]), ignore_index = True)
+	clusterInfo = kmeansAttrs.append(pd.DataFrame(km.cluster_centers_.tolist(), columns=["Age", "Annual_income","Spending_score"]))
+	clusterInfo['labels'] = labels
+
 	print("end kmeans")
 
 	return clusterInfo, labels
