@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 # from plotly.offline import plot
 # import plotly.graph_objs as go
 
 from .logic import mainLogic, graphs
+
+from django.contrib.auth.decorators import login_required
 
 clusterInfo, labels = mainLogic.kmean()
 
@@ -19,7 +21,7 @@ def api(requests):
     elif dataReq == "Aprs" :
         return JsonResponse(mainLogic.apr(int(requests.GET["cluster"]), float(requests.GET["ms"]), float(requests.GET["mc"]), float(requests.GET["ml"])))
 
-
+@login_required
 def home(requests):
     context = {
         'activeTab' : "dashboard",
@@ -38,21 +40,21 @@ AgeRanges = [
     '58-65',
     '66-70'
 ]
-
+@login_required
 def recommendations(request):
     context = {
         'activeTab' : "recommendations",
         'AgeRanges': AgeRanges,
     }
     return render(request, 'home/recommendations.html', context)
-
+@login_required
 def clustering(request):
     context = {
         'activeTab' : "clustering",
         'plot' : graphs.plotScatter(clusterInfo, labels)
     }
     return render(request, 'home/clustering.html', context)
-
+@login_required
 def aprOnClustering(request):
     context = {
         'activeTab' : "aprOnClustering",
